@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{94EFAECD-9C6E-4BF6-AA9C-9BE537327ED9}</ProjectGuid>
+    <ProjectGuid>{9290E484-3B84-4989-804D-DFB3A3915E67}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>VigenereCipher</RootNamespace>
-    <AssemblyName>VigenereCipher</AssemblyName>
+    <RootNamespace>Tasks</RootNamespace>
+    <AssemblyName>Tasks</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +49,16 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VigenereCipher\VigenereCipher.csproj">
+      <Project>{94efaecd-9c6e-4bf6-aa9c-9be537327ed9}</Project>
+      <Name>VigenereCipher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VigenereWithTwoKeys\VigenereWithTwoKeys.csproj">
+      <Project>{c445a45d-192d-47b1-bd90-8044f6a30bbf}</Project>
+      <Name>VigenereWithTwoKeys</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
