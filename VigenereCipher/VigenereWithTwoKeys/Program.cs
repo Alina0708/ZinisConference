@@ -1,4 +1,4 @@
-﻿namespace VigenereWithTwoKeys
+﻿namespace Vigenere
 {
 	internal class Program
 	{

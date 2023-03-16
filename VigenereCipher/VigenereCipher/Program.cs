@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VigenereCipher
+namespace Vigenere
 {
 	public class VigenereCipher
 	{
