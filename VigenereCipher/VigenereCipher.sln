@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VigenereCipher", "VigenereCipher\VigenereCipher.csproj", "{94EFAECD-9C6E-4BF6-AA9C-9BE537327ED9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VigenуreWithKeys", "VigenуreWithKeys\VigenуreWithKeys.csproj", "{544F05EE-3023-445B-AC27-D0BBEBE2D489}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VigenereWithTwoKeys", "VigenereWithTwoKeys\VigenereWithTwoKeys.csproj", "{C445A45D-192D-47B1-BD90-8044F6A30BBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{94EFAECD-9C6E-4BF6-AA9C-9BE537327ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94EFAECD-9C6E-4BF6-AA9C-9BE537327ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94EFAECD-9C6E-4BF6-AA9C-9BE537327ED9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{544F05EE-3023-445B-AC27-D0BBEBE2D489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{544F05EE-3023-445B-AC27-D0BBEBE2D489}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{544F05EE-3023-445B-AC27-D0BBEBE2D489}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{544F05EE-3023-445B-AC27-D0BBEBE2D489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C445A45D-192D-47B1-BD90-8044F6A30BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C445A45D-192D-47B1-BD90-8044F6A30BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C445A45D-192D-47B1-BD90-8044F6A30BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C445A45D-192D-47B1-BD90-8044F6A30BBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
