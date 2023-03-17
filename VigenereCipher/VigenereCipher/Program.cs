@@ -8,6 +8,8 @@ namespace Vigenere
 		const string defaultAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		readonly string letters;
 
+		public string EnglishAlphabet { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
 		public VigenereCipher(string alphabet = null)
 		{
 			letters = string.IsNullOrEmpty(alphabet) ? defaultAlphabet : alphabet;
@@ -56,6 +58,16 @@ namespace Vigenere
 		//дешифрование текста
 		public string Decrypt(string encryptedMessage, string password)
 			=> Vigenere(encryptedMessage, password, false);
+
+		public string Encode(string textToEncode, string key)
+		{
+			throw new NotImplementedException();
+		}
+
+		public string Decode(string textToDecode, string key)
+		{
+			throw new NotImplementedException();
+		}
 	}
 	internal class Program
 	{
