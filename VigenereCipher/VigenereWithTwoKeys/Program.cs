@@ -1,6 +1,8 @@
-﻿namespace Vigenere
+﻿using VigenereCipher;
+
+namespace Vigenere
 {
-	internal class Program
+	public class VigenereWithTwoKeys : IVigenere
 	{
 		static void Main()
 		{

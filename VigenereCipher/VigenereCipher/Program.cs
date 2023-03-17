@@ -1,8 +1,9 @@
 ﻿using System;
+using VigenereCipher;
 
 namespace Vigenere
 {
-	public class VigenereCipher
+	public class VigenereCipher : IVigenere
 	{
 		const string defaultAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		readonly string letters;

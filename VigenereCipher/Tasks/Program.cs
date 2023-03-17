@@ -1,9 +1,10 @@
 ﻿namespace Tasks
 {
-	internal class Program
+	internal class Tasks : ITask
 	{
 		static void Main()
 		{
+
 		}
 	}
 
