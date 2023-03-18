@@ -5,82 +5,61 @@ namespace Vigenere
 {
 	public class VigenereCipher : IVigenere
 	{
-		const string defaultAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		readonly string letters;
-
-		public string EnglishAlphabet { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-		public VigenereCipher(string alphabet = null)
+		public string EnglishAlphabet { get; set; } = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		
+		private string GetRepeatKey(string key, string text)
 		{
-			letters = string.IsNullOrEmpty(alphabet) ? defaultAlphabet : alphabet;
-		}
-
-		//генерация повторяющегося пароля
-		private string GetRepeatKey(string s, int n)
-		{
-			var p = s;
-			while (p.Length < n)
+			var KeyDuplication = key;
+			if (KeyDuplication.Length < text.Length)
 			{
-				p += p;
+				KeyDuplication += KeyDuplication;
 			}
-
-			return p.Substring(0, n);
+			return KeyDuplication.Substring(0, text.Length);
 		}
 
-		private string Vigenere(string text, string password, bool encrypting = true)
+		private string Vigenere(string text, string key, bool encrypting = true)
 		{
-			var gamma = GetRepeatKey(password, text.Length);
+			var gamma = GetRepeatKey(key, text);
 			var retValue = "";
-			var q = letters.Length;
 
 			for (int i = 0; i < text.Length; i++)
 			{
-				var letterIndex = letters.IndexOf(text[i]);
-				var codeIndex = letters.IndexOf(gamma[i]);
-				if (letterIndex < 0)
-				{
-					//если буква не найдена, добавляем её в исходном виде
-					retValue += text[i].ToString();
-				}
-				else
-				{
-					retValue += letters[(q + letterIndex + ((encrypting ? 1 : -1) * codeIndex)) % q].ToString();
-				}
+				var letterIndex = EnglishAlphabet.IndexOf(text[i]);
+				var codeIndex = EnglishAlphabet.IndexOf(gamma[i]);
+
+				retValue += letterIndex < 0 ? 
+			    text[i].ToString(): 
+				EnglishAlphabet[(EnglishAlphabet.Length + letterIndex + ((encrypting ? 1 : -1) * codeIndex)) % EnglishAlphabet.Length].ToString();
 			}
 
 			return retValue;
 		}
 
-		//шифрование текста
-		public string Encrypt(string plainMessage, string password)
-			=> Vigenere(plainMessage, password);
-
-		//дешифрование текста
-		public string Decrypt(string encryptedMessage, string password)
-			=> Vigenere(encryptedMessage, password, false);
 
 		public string Encode(string textToEncode, string key)
 		{
-			throw new NotImplementedException();
+			return Vigenere(textToEncode, key);		
 		}
 
 		public string Decode(string textToDecode, string key)
 		{
-			throw new NotImplementedException();
+			return Vigenere(textToDecode, key, false);
 		}
 	}
 	internal class Program
 	{
 		static void Main()
 		{
-			var cipher = new VigenereCipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+			Console.WriteLine("Шифр Виженера с 1 ключом");
+			var cipher = new VigenereCipher();
 			Console.Write("Введите текст: ");
 			var inputText = Console.ReadLine().ToUpper();
 			Console.Write("Введите ключ: ");
-			var password = Console.ReadLine().ToUpper();
-			var encryptedText = cipher.Encrypt(inputText, password);
+			var key = Console.ReadLine().ToUpper();
+			var encryptedText = cipher.Encode(inputText, key);
+			var decodeText = cipher.Decode(encryptedText, key);
 			Console.WriteLine("Зашифрованное сообщение: {0}", encryptedText);
-			Console.WriteLine("Расшифрованное сообщение: {0}", cipher.Decrypt(encryptedText, password));
+			Console.WriteLine("Расшифрованное сообщение: {0}", decodeText);
 			Console.ReadLine();
 		}
 	}
