@@ -10,10 +10,13 @@ namespace Vigenere
 		private string GetRepeatKey(string key, string text)
 		{
 			var KeyDuplication = key;
-			if (KeyDuplication.Length < text.Length)
+			do
 			{
 				KeyDuplication += KeyDuplication;
 			}
+			while (KeyDuplication.Length < text.Length);
+
+
 			return KeyDuplication.Substring(0, text.Length);
 		}
 
