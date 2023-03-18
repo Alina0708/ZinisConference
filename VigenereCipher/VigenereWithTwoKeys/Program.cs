@@ -1,5 +1,4 @@
-﻿using VigenereCipher;
-using System;
+﻿using System;
 
 namespace Vigenere
 {
@@ -9,7 +8,7 @@ namespace Vigenere
 			Decode(Decode(textToDecode, key), key2);
 
 		public string Encode(string textToEncode, string key, string key2) =>
-            Encode(Encode(textToEncode, key), key2);
+			Encode(Encode(textToEncode, key), key2);
 
 		static void Main()
 		{
