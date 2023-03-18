@@ -11,12 +11,12 @@ namespace Tasks
 
 		//Timers
 		DateTime SetTime(); // => DateTime.Now
-		DateTime GetDiff(DateTime start, DateTime stop); // => stop - start
+		TimeSpan GetDiff(DateTime start, DateTime stop); // => stop - start
 
 		//Stats
-		Dictionary<string, uint> GetStatsFromText(string text); // get count of each symbols
+		Dictionary<char, uint> GetStatsFromText(string text); // get count of each symbols
 
-		void ShowStats(Dictionary<string, uint> dictionary);
+		void ShowStats(Dictionary<char, uint> dictionary);
 
 	}
 }
