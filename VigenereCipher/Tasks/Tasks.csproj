@@ -56,10 +56,6 @@
       <Project>{94efaecd-9c6e-4bf6-aa9c-9be537327ed9}</Project>
       <Name>VigenereCipher</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VigenereWithTwoKeys\VigenereWithTwoKeys.csproj">
-      <Project>{c445a45d-192d-47b1-bd90-8044f6a30bbf}</Project>
-      <Name>VigenereWithTwoKeys</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
