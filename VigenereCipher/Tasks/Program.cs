@@ -9,18 +9,27 @@ namespace Tasks
 		private readonly Dictionary<char, uint> alphabetEntities = new Dictionary<char, uint>();
 		static void Main()
 		{
+			
 			Console.WriteLine("Шифр Виженера с 1 ключом");
 			VigenereCipher.VigenereCipher cipher = new VigenereCipher.VigenereCipher();
 			var tasks = new Tasks();
 			var inputText = tasks.ReadFromFile("D:/conference/file.txt").ToUpper();
 			Console.Write("Введите ключ: ");
 			var key = Console.ReadLine().ToUpper();
+			var startEncode = tasks.SetTime();
 			var encryptedText = cipher.Encode(inputText, key);
+			var stopEncode = tasks.SetTime();
+			var startDecode = tasks.SetTime();
 			var decodeText = cipher.Decode(encryptedText, key).ToLower();
+			var stopDecode = tasks.SetTime();
+
 			Console.WriteLine("Зашифрованное сообщение: {0}", encryptedText.ToLower());
 			Console.WriteLine("----------------------------------------------");
 			Console.WriteLine("Расшифрованное сообщение: {0}", decodeText);
+			Console.WriteLine();
 			tasks.WriteToFile("vigenereCipher.txt", encryptedText);
+			Console.WriteLine("Время затраченное на зашифровку : {0}", tasks.GetDiff(stopEncode, startEncode));
+			Console.WriteLine("Время затраченное на расшифровку: {0}", tasks.GetDiff(stopDecode, startDecode));
 			Console.WriteLine();
 
 			Console.WriteLine("Шифр Виженера с 2-мя ключами");
@@ -29,13 +38,20 @@ namespace Tasks
 			key = Console.ReadLine().ToUpper();
 			Console.Write("Введите ключ 2: ");
 			var key2 = Console.ReadLine().ToUpper();
+			startEncode = tasks.SetTime();
 			encryptedText = cipher.Encode(inputText, key, key2);
+			stopEncode = tasks.SetTime();
+			startDecode = tasks.SetTime();
 			decodeText = cipher.Decode(encryptedText, key, key2).ToLower();
+			stopDecode = tasks.SetTime();
+
 			Console.WriteLine("Зашифрованное сообщение: {0}", encryptedText.ToLower());
 			Console.WriteLine("----------------------------------------------");
 			Console.WriteLine("Расшифрованное сообщение: {0}", decodeText);
+			Console.WriteLine();
 			tasks.WriteToFile("vigenereCipherWith2Keys.txt", encryptedText);
-			
+			Console.WriteLine("Время затраченное на зашифровку : {0}", tasks.GetDiff(stopEncode, startEncode));
+			Console.WriteLine("Время затраченное на расшифровку: {0}", tasks.GetDiff(stopDecode, startDecode));
 
 
 		}
