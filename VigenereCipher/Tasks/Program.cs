@@ -22,14 +22,21 @@ namespace Tasks
 			var startDecode = tasks.SetTime();
 			var decodeText = cipher.Decode(encryptedText, key).ToLower();
 			var stopDecode = tasks.SetTime();
-
+			var timeEncode = tasks.GetDiff(stopEncode, startEncode);
+			var timeDecode = tasks.GetDiff(stopDecode, startDecode);
+			var statsInput = tasks.GetStatsFromText(decodeText);
+			var statsEncode = tasks.GetStatsFromText(encryptedText);
 			Console.WriteLine("Зашифрованное сообщение: {0}", encryptedText.ToLower());
 			Console.WriteLine("----------------------------------------------");
 			Console.WriteLine("Расшифрованное сообщение: {0}", decodeText);
 			Console.WriteLine();
 			tasks.WriteToFile("vigenereCipher.txt", encryptedText);
-			Console.WriteLine("Время затраченное на зашифровку : {0}", tasks.GetDiff(stopEncode, startEncode));
-			Console.WriteLine("Время затраченное на расшифровку: {0}", tasks.GetDiff(stopDecode, startDecode));
+			Console.WriteLine("Время затраченное на зашифровку : {0}", timeEncode);
+			Console.WriteLine("Время затраченное на расшифровку: {0}", timeDecode);
+			Console.WriteLine("Статистика зашифрованного сообщения:");
+			tasks.ShowStats(statsEncode);
+			Console.WriteLine("Статистика расшифрованного сообщения:");
+			tasks.ShowStats(statsInput);
 			Console.WriteLine();
 
 			Console.WriteLine("Шифр Виженера с 2-мя ключами");
@@ -44,6 +51,8 @@ namespace Tasks
 			startDecode = tasks.SetTime();
 			decodeText = cipher.Decode(encryptedText, key, key2).ToLower();
 			stopDecode = tasks.SetTime();
+			statsInput = tasks.GetStatsFromText(decodeText);
+			statsEncode = tasks.GetStatsFromText(encryptedText);
 
 			Console.WriteLine("Зашифрованное сообщение: {0}", encryptedText.ToLower());
 			Console.WriteLine("----------------------------------------------");
@@ -52,12 +61,12 @@ namespace Tasks
 			tasks.WriteToFile("vigenereCipherWith2Keys.txt", encryptedText);
 			Console.WriteLine("Время затраченное на зашифровку : {0}", tasks.GetDiff(stopEncode, startEncode));
 			Console.WriteLine("Время затраченное на расшифровку: {0}", tasks.GetDiff(stopDecode, startDecode));
-
+			Console.WriteLine("Статистика зашифрованного сообщения:");
+			tasks.ShowStats(statsEncode);
+			Console.WriteLine("Статистика расшифрованного сообщения:");
+			tasks.ShowStats(statsInput);
 
 		}
-
-		public DateTime SetTime() => DateTime.Now;
-		public TimeSpan GetDiff(DateTime start, DateTime stop) => stop - start;
 
 		public Dictionary<char, uint> GetStatsFromText(string text)
 		{
@@ -121,6 +130,8 @@ namespace Tasks
 
 		public string ReadFromFile(string path) => ReadFromFiles(path);
 		public string WriteToFile(string path, string textToWrite) => WriteToFiles(path, textToWrite);
+		public DateTime SetTime() => DateTime.Now;
+		public TimeSpan GetDiff(DateTime start, DateTime stop) => stop - start;
 	}
 
 }
