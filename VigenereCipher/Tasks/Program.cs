@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Tasks
 {
@@ -8,7 +9,9 @@ namespace Tasks
 		private readonly Dictionary<char, uint> alphabetEntities = new Dictionary<char, uint>();
 		static void Main()
 		{
-
+			var tasks = new Tasks();
+			var inputText = tasks.ReadFromFile("D:/conference/file.txt");
+			Console.WriteLine(inputText);
 		}
 
 		public DateTime SetTime() => DateTime.Now;
@@ -39,15 +42,30 @@ namespace Tasks
 			statistics += $"Всего символов: {counter}";
 			Console.WriteLine(statistics);
 		}
-		public string ReadFromFile(string path)
+		public string ReadFromFiles(string path)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				using (StreamReader sr = new StreamReader(path))
+				{
+					string fileContent = sr.ReadToEnd();
+
+					return fileContent;
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Ошибка чтения файла: " + ex.Message);
+				return null;
+			}
 		}
 
 		public string WriteToFile(string path, string textToWrite)
 		{
 			throw new NotImplementedException();
 		}
+
+		public string ReadFromFile(string path) => ReadFromFiles(path);
 	}
 
 }
