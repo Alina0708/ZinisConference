@@ -9,9 +9,35 @@ namespace Tasks
 		private readonly Dictionary<char, uint> alphabetEntities = new Dictionary<char, uint>();
 		static void Main()
 		{
+			Console.WriteLine("Шифр Виженера с 1 ключом");
+			VigenereCipher.VigenereCipher cipher = new VigenereCipher.VigenereCipher();
 			var tasks = new Tasks();
 			var inputText = tasks.ReadFromFile("D:/conference/file.txt");
-			Console.WriteLine(inputText);
+			Console.Write("Введите ключ: ");
+			var key = Console.ReadLine().ToUpper();
+			var encryptedText = cipher.Encode(inputText, key);
+			var decodeText = cipher.Decode(encryptedText, key);
+			Console.WriteLine("Зашифрованное сообщение: {0}", encryptedText);
+			Console.WriteLine("----------------------------------------------");
+			Console.WriteLine("Расшифрованное сообщение: {0}", decodeText);
+			tasks.WriteToFile("vigenereCipher.txt", encryptedText);
+			Console.WriteLine();
+
+			Console.WriteLine("Шифр Виженера с 2-мя ключами");
+		    inputText = tasks.ReadFromFile("D:/conference/file.txt");
+			Console.Write("Введите ключ: ");
+			key = Console.ReadLine().ToUpper();
+			Console.Write("Введите ключ 2: ");
+			var key2 = Console.ReadLine().ToUpper();
+			encryptedText = cipher.Encode(inputText, key, key2);
+			decodeText = cipher.Decode(encryptedText, key, key2);
+			Console.WriteLine("Зашифрованное сообщение: {0}", encryptedText);
+			Console.WriteLine("----------------------------------------------");
+			Console.WriteLine("Расшифрованное сообщение: {0}", decodeText);
+			tasks.WriteToFile("vigenereCipherWith2Keys.txt", encryptedText);
+			
+
+
 		}
 
 		public DateTime SetTime() => DateTime.Now;
@@ -60,12 +86,25 @@ namespace Tasks
 			}
 		}
 
-		public string WriteToFile(string path, string textToWrite)
+		public string WriteToFiles(string path, string textToWrite)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				using (StreamWriter writer = new StreamWriter(path, false))
+				{
+					writer.Write(textToWrite);
+				}
+				Console.WriteLine("Запись в файл успешно завершена");
+				return "Запись в файл успешно завершена";
+			}
+			catch (Exception ex)
+			{
+				return "Ошибка записи в файл: " + ex.Message;
+			}
 		}
 
 		public string ReadFromFile(string path) => ReadFromFiles(path);
+		public string WriteToFile(string path, string textToWrite) => WriteToFiles(path, textToWrite);
 	}
 
 }
