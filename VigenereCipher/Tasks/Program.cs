@@ -9,81 +9,69 @@ namespace Tasks
 		private readonly Dictionary<char, uint> alphabetEntities = new Dictionary<char, uint>();
 		static void Main()
 		{
+			VigenereCipher.VigenereCipher cipher = new VigenereCipher.VigenereCipher();
+			Tasks tasks = new Tasks();
 			try
 			{
-			Console.WriteLine("Шифр Виженера с 1 ключом");
+				Console.WriteLine("Шифр Виженера с 1 ключом");
+				var plainText = tasks.ReadFromFile("File.txt").ToUpper();
 
-			VigenereCipher.VigenereCipher cipher = new VigenereCipher.VigenereCipher();
-			var tasks = new Tasks();
-			var inputText = tasks.ReadFromFile("File.txt").ToUpper();
+				Console.Write("Введите ключ: ");
+				var key = Console.ReadLine().ToUpper();
 
-			Console.Write("Введите ключ: ");
-			var key = Console.ReadLine().ToUpper();
+				var encodeStartTime = tasks.SetTime();
+				var encodedText = cipher.Encode(plainText, key);
+				var totalEncodeTime = tasks.GetDiff(encodeStartTime, tasks.SetTime());
 
-			var startEncode = tasks.SetTime();
-			var encryptedText = cipher.Encode(inputText, key);
-            var stopEncode = tasks.SetTime();
+				var decodeStartTime = tasks.SetTime();
+				var decodedText = cipher.Decode(encodedText, key);
+				var totalDecodeTime = tasks.GetDiff(decodeStartTime, tasks.SetTime());
 
-			var startDecode = tasks.SetTime();
-			var decodeText = cipher.Decode(encryptedText, key);
-			var stopDecode = tasks.SetTime();
+				var plainTextStats = tasks.GetStatsFromText(plainText);
+				var encodedTextStats = tasks.GetStatsFromText(encodedText);
 
-			var timeEncode = tasks.GetDiff(startEncode, stopEncode);
-			var timeDecode = tasks.GetDiff(startDecode, stopDecode);
+				Console.WriteLine($"Зашифрованное сообщение: {encodedText}");
+				Console.WriteLine("----------------------------------------------");
+				Console.WriteLine($"Расшифрованное сообщение: {decodedText}\n");
+				Console.WriteLine($"Время затраченное на зашифровку : {totalEncodeTime}");
+				Console.WriteLine($"Время затраченное на расшифровку: {totalDecodeTime}");
+				Console.WriteLine("Статистика зашифрованного сообщения:");
+				tasks.ShowStats(encodedTextStats);
+				Console.WriteLine("Статистика расшифрованного сообщения:");
+				tasks.ShowStats(plainTextStats);
+				Console.WriteLine();
+				tasks.WriteToFile("vigenereCipher.txt", encodedText);
+				//
+				Console.WriteLine("Шифр Виженера с 2-мя ключами");
 
-			var statsInput = tasks.GetStatsFromText(decodeText);
-			var statsEncode = tasks.GetStatsFromText(encryptedText);
+				Console.Write("Введите ключ: ");
+				key = Console.ReadLine().ToUpper();
+				Console.Write("Введите ключ 2: ");
+				var key2 = Console.ReadLine().ToUpper();
 
-			Console.WriteLine("Зашифрованное сообщение: {0}", encryptedText);
-			Console.WriteLine("----------------------------------------------");
-			Console.WriteLine("Расшифрованное сообщение: {0}", decodeText);
+				encodeStartTime = tasks.SetTime();
+				encodedText = cipher.Encode(plainText, key, key2);
+				totalEncodeTime = tasks.GetDiff(encodeStartTime, tasks.SetTime());
 
-			Console.WriteLine();
-			tasks.WriteToFile("vigenereCipher.txt", encryptedText);
-			Console.WriteLine("Время затраченное на зашифровку : {0}", timeEncode);
-			Console.WriteLine("Время затраченное на расшифровку: {0}", timeDecode);
+				decodeStartTime = tasks.SetTime();
+				decodedText = cipher.Decode(encodedText, key, key2);
+				totalDecodeTime = tasks.GetDiff(decodeStartTime, tasks.SetTime());
 
-			Console.WriteLine("Статистика зашифрованного сообщения:");
-			tasks.ShowStats(statsEncode);
-			Console.WriteLine("Статистика расшифрованного сообщения:");
-			tasks.ShowStats(statsInput);
-			Console.WriteLine();
+				plainTextStats = tasks.GetStatsFromText(decodedText);
+				encodedTextStats = tasks.GetStatsFromText(encodedText);
 
+				Console.WriteLine($"Зашифрованное сообщение: {encodedText}"); ;
+				Console.WriteLine("----------------------------------------------");
+				Console.WriteLine($"Расшифрованное сообщение: {decodedText}\n");
+				Console.WriteLine($"Время затраченное на зашифровку : {totalEncodeTime}");
+				Console.WriteLine($"Время затраченное на расшифровку: {totalDecodeTime}");
 
-
-
-			Console.WriteLine("Шифр Виженера с 2-мя ключами");
-
-			Console.Write("Введите ключ: ");
-			key = Console.ReadLine().ToUpper();
-			Console.Write("Введите ключ 2: ");
-			var key2 = Console.ReadLine().ToUpper();
-
-			startEncode = tasks.SetTime();
-			encryptedText = cipher.Encode(inputText, key, key2);
-			stopEncode = tasks.SetTime();
-
-			startDecode = tasks.SetTime();
-			decodeText = cipher.Decode(encryptedText, key, key2);
-			stopDecode = tasks.SetTime();
-
-			statsInput = tasks.GetStatsFromText(decodeText);
-			statsEncode = tasks.GetStatsFromText(encryptedText);
-
-			Console.WriteLine("Зашифрованное сообщение: {0}", encryptedText);
-			Console.WriteLine("----------------------------------------------");
-			Console.WriteLine("Расшифрованное сообщение: {0}", decodeText);
-			Console.WriteLine();
-
-			tasks.WriteToFile("vigenereCipherWith2Keys.txt", encryptedText);
-			Console.WriteLine("Время затраченное на зашифровку : {0}", tasks.GetDiff(startEncode, stopEncode));
-			Console.WriteLine("Время затраченное на расшифровку: {0}", tasks.GetDiff(startDecode, stopDecode));
-
-			Console.WriteLine("Статистика зашифрованного сообщения:");
-			tasks.ShowStats(statsEncode);
-			Console.WriteLine("Статистика расшифрованного сообщения:");
-			tasks.ShowStats(statsInput);
-
+				Console.WriteLine("Статистика зашифрованного сообщения:");
+				tasks.ShowStats(encodedTextStats);
+				Console.WriteLine("Статистика расшифрованного сообщения:");
+				tasks.ShowStats(plainTextStats);
+				tasks.WriteToFile("vigenereCipherWith2Keys.txt", encodedText);
+				Console.ReadKey();
 			}
 			catch (Exception ex)
 			{
@@ -114,28 +102,25 @@ namespace Tasks
 				statistics += $"{key}: {dictionary[key]}\n";
 				counter++;
 			}
-			statistics += $"Всего символов: {counter}";
+			statistics += $"Число использованных символов: {counter}";
 			Console.WriteLine(statistics);
 		}
-		
 
-		public string ReadFromFile(string path) {
 
-				using (StreamReader sr = new StreamReader(path))
-				{
-					string fileContent = sr.ReadToEnd();
-
-					return fileContent;
-				}
+		public string ReadFromFile(string path)
+		{
+			using (StreamReader sr = new StreamReader(path))
+			{
+				return sr.ReadToEnd();
+			}
 		}
-		public string WriteToFile(string path, string textToWrite) {
-
-				using (StreamWriter writer = new StreamWriter(path, false))
-				{
-					writer.Write(textToWrite);
-				}
-				Console.WriteLine("Запись в файл успешно завершена");
-				return "Запись в файл успешно завершена";
+		public string WriteToFile(string path, string textToWrite)
+		{
+			using (StreamWriter writer = new StreamWriter(path, false))
+			{
+				writer.Write(textToWrite);
+			}
+			return "Запись в файл успешно завершена";
 		}
 		public DateTime SetTime() => DateTime.Now;
 		public TimeSpan GetDiff(DateTime start, DateTime stop) => stop - start;
