@@ -6,7 +6,6 @@ namespace Tasks
 {
 	internal class Tasks : ITask
 	{
-		private readonly Dictionary<char, uint> alphabetEntities = new Dictionary<char, uint>();
 		static void Main()
 		{
 			VigenereCipher.VigenereCipher cipher = new VigenereCipher.VigenereCipher();
@@ -82,6 +81,7 @@ namespace Tasks
 
 		public Dictionary<char, uint> GetStatsFromText(string text)
 		{
+			Dictionary<char, uint> alphabetEntities = new Dictionary<char, uint>();
 			foreach (var symbol in text.ToUpper())
 			{
 				if (alphabetEntities.TryGetValue(symbol, out _))
