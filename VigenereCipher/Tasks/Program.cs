@@ -82,7 +82,8 @@ namespace Tasks
 		public Dictionary<char, uint> GetStatsFromText(string text)
 		{
 			Dictionary<char, uint> alphabetEntities = new Dictionary<char, uint>();
-			foreach (var symbol in text.ToUpper())
+			string trimmedText = text.Trim().ToUpper();
+			foreach (var symbol in trimmedText)
 			{
 				if (alphabetEntities.TryGetValue(symbol, out _))
 					alphabetEntities[symbol] += 1;
@@ -99,10 +100,10 @@ namespace Tasks
 			var keys = dictionary.Keys;
 			foreach (var key in keys)
 			{
-				statistics += $"{key}: {dictionary[key]}\n";
+				statistics += $"{key}: {dictionary[key]} | " + (counter % 7 == 0 && counter != 0 ? "\n" : "");
 				counter++;
 			}
-			statistics += $"Число использованных символов: {counter}";
+			statistics += $"\nЧисло использованных символов: {counter}";
 			Console.WriteLine(statistics);
 		}
 
