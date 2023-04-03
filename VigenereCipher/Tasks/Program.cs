@@ -92,11 +92,13 @@ namespace Tasks
 		{
 			uint counter = 0;
 			string statistics = "";
-			var keys = dictionary.Keys;
-			foreach (var key in keys)
+			foreach (var key in VigenereCipher.VigenereCipher.EnglishAlphabet)
 			{
-				statistics += $"{key}: {dictionary[key]} | " + (counter % 7 == 0 && counter != 0 ? "\n" : "");
-				counter++;
+				if (dictionary.TryGetValue(key, out uint value))
+				{
+					statistics += $"{key}: {value} | " + (counter % 7 == 0 && counter != 0 ? "\n" : "");
+					counter++;
+				}
 			}
 			statistics += $"\nЧисло использованных символов: {counter}";
 			Console.WriteLine(statistics);

@@ -2,7 +2,7 @@
 {
 	public class VigenereCipher : IVigenere
 	{
-		public string EnglishAlphabet { get; } = "ABCDEFGHIJKLMNOPQRSTUVWXYZ,;:' !*.?";
+		public static string EnglishAlphabet { get; } = "ABCDEFGHIJKLMNOPQRSTUVWXYZ,;:' !*.?";
 		private string ReplicateKey(string key, int DesiredLength)
 		{
 			var replicatedKey = key;
