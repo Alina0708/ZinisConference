@@ -29,9 +29,7 @@ namespace Tasks
 				var plainTextStats = tasks.GetStatsFromText(plainText);
 				var encodedTextStats = tasks.GetStatsFromText(encodedText);
 
-				Console.WriteLine($"Зашифрованное сообщение: {encodedText}");
-				Console.WriteLine("----------------------------------------------");
-				Console.WriteLine($"Расшифрованное сообщение: {decodedText}\n");
+
 				Console.WriteLine($"Время затраченное на зашифровку : {totalEncodeTime}");
 				Console.WriteLine($"Время затраченное на расшифровку: {totalDecodeTime}");
 				Console.WriteLine("Статистика зашифрованного сообщения:");
@@ -59,16 +57,13 @@ namespace Tasks
 				plainTextStats = tasks.GetStatsFromText(decodedText);
 				encodedTextStats = tasks.GetStatsFromText(encodedText);
 
-				Console.WriteLine($"Зашифрованное сообщение: {encodedText}"); ;
-				Console.WriteLine("----------------------------------------------");
-				Console.WriteLine($"Расшифрованное сообщение: {decodedText}\n");
+
 				Console.WriteLine($"Время затраченное на зашифровку : {totalEncodeTime}");
 				Console.WriteLine($"Время затраченное на расшифровку: {totalDecodeTime}");
 
 				Console.WriteLine("Статистика зашифрованного сообщения:");
 				tasks.ShowStats(encodedTextStats);
-				Console.WriteLine("Статистика расшифрованного сообщения:");
-				tasks.ShowStats(plainTextStats);
+
 				tasks.WriteToFile("vigenereCipherWith2Keys.txt", encodedText);
 				Console.ReadKey();
 			}
